@@ -11,7 +11,19 @@ const validatorRegister = [
         if (user) throw new Error( 'El Username ya existe')
         return true
     }),
-
+    
+    body('password')
+    .notEmpty().withMessage("El Password es un campo Obligatorio")
+    .isLength({min:8}).withMessage("El Password debe contener minimo 8 caracteres"),
+    // No logre que andara el Strong tengo que verlo luego para ver que pasa
+    // .isStrongPassword({
+        //     minLength: 8,
+        //     minUppercase: 1,
+        //     minLowercase: 1,
+        //     minNumbers: 1,
+        //     returnScore: false,
+        // }).withMessage("El password debe tener minimo 1 letra MAYUSCULA , 1 letra minuscula , 1 numero, con una longitud minima de 8 caracteres")
+        
     body('email')
     .notEmpty().withMessage("El E-mail es un campo Obligatorio")
     .isEmail().withMessage("El formato del E-mail ingresado es invalido")
@@ -20,19 +32,9 @@ const validatorRegister = [
         if (email) throw new Error('El E-mail ya esta registrado')
         return true
     }),
-
-    body('password')
-    .notEmpty().withMessage("El Password es un campo Obligatorio")
-    .isLength({min:8}).withMessage("El Password debe contener minimo 8 caracteres"),
-        // No logre que andara el Strong tengo que verlo luego para ver que pasa
-    // .isStrongPassword({
-    //     minLength: 8,
-    //     minUppercase: 1,
-    //     minLowercase: 1,
-    //     minNumbers: 1,
-    //     returnScore: false,
-    // }).withMessage("El password debe tener minimo 1 letra MAYUSCULA , 1 letra minuscula , 1 numero, con una longitud minima de 8 caracteres")
-    
+    body('avatarURL')
+    .notEmpty().withMessage("El Avatar es un campo Obligatorio")
+    .isURL().withMessage("El Avtar debe una URL valida")
 ]
 
 
