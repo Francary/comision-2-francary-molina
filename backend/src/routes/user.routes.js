@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { crtlUser } from "../controllers/user.controllers.js";
+import { ctrlUserLogin, ctrlUserRegister } from "../controllers/user.controllers.js";
 
 const userRouter = Router()
 
-userRouter.get('/user', crtlUser)
+userRouter.post('/register', ctrlUserRegister)
+userRouter.post('/login', ctrlUserLogin)
 
 export {userRouter}
