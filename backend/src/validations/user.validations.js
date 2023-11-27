@@ -1,4 +1,5 @@
 import {body} from "express-validator"
+import  bcrypt  from "bcrypt"
 import { UserModel } from "../models/user.models.js"
 
 const validatorRegister = [
@@ -34,8 +35,32 @@ const validatorRegister = [
     }),
     body('avatarURL')
     .notEmpty().withMessage("El Avatar es un campo Obligatorio")
-    .isURL().withMessage("El Avtar debe una URL valida")
+    .isURL().withMessage("El Avatar debe una URL valida")
 ]
 
+const validatorLogin = [
+    body('email')
+    .notEmpty().withMessage("El E-mail es un campo Obligatorio")
+    .isEmail().withMessage("El formato del E-mail ingresado es invalido")
+    .custom( async (value) => {
+        const email = await UserModel.findOne(({email:value}))
+        if (!email) throw new Error('El E-mail ingresado no esta registrado, registrate te esperamos pronto !')
+        return true
+    }),
+    body('password')
+    .notEmpty().withMessage("El Password es un campo Obligatorio")
+        //PENDITE VALIDAR LA CONTRASEÑA
+    // .custom( async (value , {req}) => {
+    //     const {password} = req.body
+    //     const isMatch = await bcrypt.compare (password, value)
+    //     console.log(isMatch)
+    //     if (!isMatch) throw new Error('Esta mal la contraseña... !')
+    //     return true
+    // })
 
-export {validatorRegister}
+]
+
+export {
+    validatorRegister,
+    validatorLogin,
+}
