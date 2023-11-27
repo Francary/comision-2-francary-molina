@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { ctrlPost } from "../controllers/post.controllers.js";
+import { ctrlAllPost, ctrlCreatePost, ctrlDeletePost, ctrlEditPost, ctrlGetPost } from "../controllers/post.controllers.js";
 
 const postRouter = Router()
 
-postRouter.get('/post' , ctrlPost)
+postRouter.post('/newpost', ctrlCreatePost )
+postRouter.get('/', ctrlAllPost)
+postRouter.get('/:postId', ctrlGetPost)
+postRouter.delete('/:postId', ctrlDeletePost)
+postRouter.patch('/:postId', ctrlEditPost)
 
 export {postRouter}
