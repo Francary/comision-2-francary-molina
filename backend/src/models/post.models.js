@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-const PostShema = new Schema({
+const PostSchema = new Schema({
     title:{
         type: String,
         required: true,
@@ -8,30 +8,30 @@ const PostShema = new Schema({
     description:{
         type: String,
         required: true,
-    },
-    autor:[
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }
-],
-    comments:[
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-    }
-],
+    },  
     imageURL:{
         type: String,
         required: true,
     },
-    createdAt:{
-        type: Date,
-        required: true,
+    autor:{        
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+    },
+    comments:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment',
+        }
+    ],
+    },
+    {
+        timestamps: true,
+        versionKey: false,
     },
 
-})
+)
 
-const PostModel = model("Post", PostShema)
+const PostModel = model('Post', PostSchema)
 
 export {PostModel}

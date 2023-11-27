@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 
-const UserShema = new Schema({
+const UserSchema = new Schema({
     username:{
         type: String,
         required: true,
@@ -19,27 +19,27 @@ const UserShema = new Schema({
         type: String,
         required: true,
     },
-}
-,
-{
     post: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Post'
-    }
-]
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post',
+        }
+    ],
+    comment: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment',
+        }
+    ]
 },
 {
-  comment: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-    }
-]
-})
+    timestamps: true,
+    versionKey: false,
+}
+)
 
     // Se encripta la contraseña antes de (save) guardar el nuevo usuario 
-UserShema.pre('save', async function(next){
+UserSchema.pre('save', async function(next){
 
     if(!this.isModified('password'))
     return next()
@@ -50,6 +50,6 @@ UserShema.pre('save', async function(next){
 })
 
 
-const UserModel = model("User", UserShema)
+const UserModel = model('User', UserSchema)
 
 export {UserModel}
