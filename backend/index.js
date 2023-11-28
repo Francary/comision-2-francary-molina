@@ -27,8 +27,8 @@ app.use(express.urlencoded({extended: false}))
 
 
     //Routes
-app.use('/comment' , commentRouter)    
-app.use('/post' ,verifyToken, postRouter)    
+app.use('/comment' , verifyToken, commentRouter)    
+app.use('/post' , verifyToken, postRouter)    
 app.use('/user' , userRouter)    
     
 app.listen(env.PORT, async () => {
