@@ -31,12 +31,41 @@ const ctrlCreateComment = async (req, res) =>{
 
 }
 const ctrlAllComment = async (req, res) =>{
+    const {postId} = req.params
+    
+    try {
+        const commentList = await CommentModel.find({post: postId})
+        return res.status(200).json(commentList)
+    } catch (error) {
+        return res.status(500).json({ error: "Comentarios no encontrados" });
+    }
 
 
 }
 const ctrlGetComment = async (req, res) =>{
+    const {postId} = req.params
+    const {commentId} = req.params
+    
+    try {
+        const commentList = await CommentModel.findOne({
 
-
+            post: postId,
+            _id: commentId
+        })
+            .populate('autor', ['username'])
+            .populate({ 
+                path: 'post',
+                select: ['title'],
+                populate: {
+                    path: 'autor',
+                    select: ['username']
+                }
+            });
+            
+        return res.status(200).json(commentList)
+    } catch (error) {
+        return res.status(500).json({ error: "Comentarios no encontrados" });
+    }
 }
 const ctrlDeleteComment = async (req, res) =>{
     const {commentId , postId} = req.params
@@ -63,7 +92,28 @@ const ctrlDeleteComment = async (req, res) =>{
 }
 
 const ctrlEditComment = async (req, res) =>{
+    const {commentId , postId} = req.params
+    const userId = req.user._id 
 
+    try {
+        const comment = await  CommentModel.findOne(
+            {
+                _id : commentId,
+                autor: userId,
+                post: postId,
+            }
+        )
+
+        if (!comment) {
+            return res.status(404).json({ error: 'No encontramos el Comentario que intentas editar' }); 
+        }
+        comment.set(req.body)
+
+        await comment.save()
+        return res.status(200).json(comment);
+    } catch (error) {
+        return res.status(500).json({ error: 'Tuvimos un error' });
+    }
 
 }
 

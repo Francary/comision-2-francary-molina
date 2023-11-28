@@ -3,10 +3,10 @@ import { ctrlGetComment, ctrlAllComment, ctrlCreateComment, ctrlEditComment, ctr
 
 const commentRouter = Router()
 
-commentRouter.get('/', ctrlAllComment)
-commentRouter.get('/:commentId', ctrlGetComment)
+commentRouter.get('/:postId', ctrlAllComment)
+commentRouter.get('/:postId/:commentId', ctrlGetComment)
 commentRouter.post('/:postId', ctrlCreateComment)
-commentRouter.patch('/:commentId', ctrlEditComment)
+commentRouter.patch('/:postId/:commentId', ctrlEditComment)
 commentRouter.delete('/:postId/:commentId', ctrlDeleteComment)
 
 export {commentRouter}
