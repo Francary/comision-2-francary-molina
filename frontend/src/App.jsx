@@ -1,10 +1,17 @@
+import { Router } from "./Router.jsx"
+import { Footer } from "./components/Footer.jsx"
+import { Navbar } from "./components/Navbar.jsx"
+import React from "react"
+
 const App = () => {
 
 
   return (
-    <>
-    <h1>ESTAMOS TRABAJANDO VUELVE PRONTO</h1>
-    </>
+    <React.Fragment>
+        <Navbar/>
+        <Router />
+        <Footer/>
+    </React.Fragment>
   )
 }
 
