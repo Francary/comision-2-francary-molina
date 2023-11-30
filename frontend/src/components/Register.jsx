@@ -7,7 +7,7 @@ const Register = () => {
     const ref = useRef(null)
 
     const navigate = useNavigate()
-    const handleSubmint = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData (e.target);
@@ -39,8 +39,12 @@ const Register = () => {
     }
 
     return(
-        <>
-        <form className="container text-bg-warning mx-auto my-5 p-5 rounded-5 col-md" onSubmit={handleSubmint} ref={ref}>
+        <div className="d-flex flex-column m-5">
+         <form 
+            onSubmit={handleSubmit}
+            ref={ref}
+            className="text-bg-secondary m-auto p-5 rounded-5"
+            >
             <h2>Register</h2>              
             <input className="form-control m-3" type="text" placeholder="Usuario" name="username"/>
             <input className="form-control m-3" type="email" placeholder="test@gmail.com" name="email"/>
@@ -51,7 +55,7 @@ const Register = () => {
                 <Link className="btn btn-primary" to="/user/login">Login</Link>
             </div>
         </form>     
-        </>
+        </div>
     )
 }
 

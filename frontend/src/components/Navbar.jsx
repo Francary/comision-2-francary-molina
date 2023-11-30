@@ -7,7 +7,7 @@ const Navbar = () => {
     const {logout} = useContext(AuthContext)
     return (
 <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-  <div className="container-fluid">
+<div className="container">
    
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
@@ -23,9 +23,6 @@ const Navbar = () => {
             <NavLink className="nav-link " aria-current="page" to="/post">POST</NavLink>
         </li>
         <li className="nav-item">
-            <NavLink className="nav-link " aria-current="page" to="/">PRUEBA</NavLink>
-        </li>
-        <li className="nav-item">
             <NavLink className="nav-link " aria-current="page" to="/user/register">REGISTER</NavLink>
         </li>
         <li className="nav-item">
@@ -33,10 +30,10 @@ const Navbar = () => {
         </li>
       </ul>
     </div>
-         <div className="d-flex" role="search">
-            <button onClick={logout} className="btn btn-outline-danger btn-sm" type="submit">LOGOUT</button>
-        </div>
-    </div>
+         
+    <button onClick={logout} className="btn btn-outline-danger btn-sm" type="submit">LOGOUT</button>
+        
+</div>
 </nav>
     )
 }

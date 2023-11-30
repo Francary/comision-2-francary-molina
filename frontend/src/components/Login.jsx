@@ -43,14 +43,20 @@ const Login = () => {
     }
 
     return (
-        <>
-        <form onSubmit={handleSubmit} ref={ref} className="col-sm-3 text-bg-secondary m-auto p-5 rounded-5" action="">
+        <div className="d-flex flex-column m-5">
+
+        <form 
+            onSubmit={handleSubmit}
+            ref={ref}
+            className="text-bg-secondary m-auto p-5 rounded-5"
+            >
+            <h2>Login</h2> 
             <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Email address</label>
+                <label  className="form-label">Email address</label>
                 <input type="email" className="form-control"  placeholder="name@example.com" name="email"/>
             </div>
             <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Password</label>
+                <label  className="form-label">Password</label>
                 <input type="password" className="form-control"  placeholder="password" name="password"/>
             </div>
             <div className="d-flex gap-5 ">
@@ -58,7 +64,7 @@ const Login = () => {
                 <Link className="btn btn-primary" to="/user/register">Register</Link>
             </div>
         </form>
-        </>
+        </div>
     )
 }
 
