@@ -1,4 +1,4 @@
-import { Router } from "./Router.jsx"
+import { Router } from "./Routes/Router.jsx"
 import { Footer } from "./components/Footer.jsx"
 import { Navbar } from "./components/Navbar.jsx"
 import React from "react"

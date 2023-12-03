@@ -1,7 +1,12 @@
+import { useContext, useState } from "react";
 import { Link} from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const PostPage = () => {
-    
+
+    const [ postList , setPostList ] = useState([])
+    const { auth } = useContext(AuthContext)
+    console.log("Hola" ,auth)
     return (
    
     <div className="container d-flex flex-column p-3 gap-4 justify-content-center mt-5">
@@ -12,6 +17,7 @@ const PostPage = () => {
                 <input type="search" name="" id="" placeholder="Search" className="form-control"/>
         </div>
     </div>
+
    
 )
 }
