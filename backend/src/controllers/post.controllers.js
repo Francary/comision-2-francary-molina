@@ -53,7 +53,7 @@ const ctrlDeletePost = async (req , res ) =>{
             autor: userId,
         })
         if (!postList) {
-            return res.status(404).json({error: 'Post no Encontrado'})
+            return res.status(404).json({error: 'No tienes permisos para Eliminar este Post o el Post no existe'})
         }
         await PostModel.findOneAndDelete({
             _id: postId,
@@ -64,7 +64,7 @@ const ctrlDeletePost = async (req , res ) =>{
             { $pull: { post: postId } }
            
         )
-        return res.status(200).json(postList);
+        return res.status(200).json({ message: 'Post Eliminado exitosamente' });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -101,12 +101,13 @@ const ctrlEditPost = async (req , res ) =>{
                 autor: userId,
             })
         if (!post) {
-            return res.status(404).json({ error: 'No encontramos el Post que intentas editar' }); 
+            return res.status(404).json({ error: 'No tienes permisos para Actualizar este Post o el Post no existe' }); 
         }
+       
         post.set(req.body)
 
         await post.save()
-        return res.status(200).json(post);
+        return res.status(200).json({ message: 'Post Actualizado exitosamente' });
     } catch (error) {
         return res.status(500).json({ error: 'Tuvimos un error' });
     }
