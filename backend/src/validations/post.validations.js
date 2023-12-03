@@ -1,4 +1,6 @@
 import {body} from 'express-validator'
+import { verifyToken } from '../middlewares/verify.token.js'
+import { verifyValidations } from '../middlewares/verify.validations.js'
 
 const validatorCreatePost = [
     body('title')
@@ -13,7 +15,9 @@ const validatorCreatePost = [
 
     body('imageURL')
     .notEmpty().withMessage('Para poder Publicar un Post debe Completar la URL con tus fotos')
-    .isURL().withMessage("URL no es valida")
+    .isURL().withMessage("URL no es valida"),
+    verifyToken,
+    verifyValidations,
 ]
 
 const validatorEditPost = [
@@ -29,12 +33,19 @@ const validatorEditPost = [
 
     body('imageURL')
     .notEmpty().withMessage('Para poder Publicar un Post debe Completar la URL con tus fotos')
-    .isURL().withMessage("URL no es valida")
+    .isURL().withMessage("URL no es valida"),
+    verifyToken,
+    verifyValidations,
+]
+const validatorDeletePost = [
+    verifyToken,
+    verifyValidations,
 ]
 
 
 export {
     validatorCreatePost,
     validatorEditPost,
+    validatorDeletePost,
 
 }
