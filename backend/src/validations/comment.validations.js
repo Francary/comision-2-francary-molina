@@ -24,7 +24,18 @@ const validatorGetComment = [
     .custom(isValidObjectId).withMessage('La  id ingresada no es  valida'),
 ]
 
+const validatorDeleteComment = [
+    verifyToken,
+    verifyValidations,
+]
+const validatorEditComment = [
+    verifyToken,
+    verifyValidations,
+]
+
 export {
     validatorCreateComment,
     validatorGetComment,
+    validatorDeleteComment,
+    validatorEditComment,
 }
