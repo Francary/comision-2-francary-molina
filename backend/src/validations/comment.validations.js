@@ -1,11 +1,15 @@
 import  {body ,param} from 'express-validator'
 import { isValidObjectId } from 'mongoose';
+import { verifyToken } from '../middlewares/verify.token.js';
+import { verifyValidations } from '../middlewares/verify.validations.js';
 
 
 const validatorCreateComment = [
     body('description')
    .notEmpty().withMessage('El comentario no puede estar vacio')
-   .isLength({min:4}).withMessage('Tu comentario debe ser minimo de 4 caracteres')
+   .isLength({min:4}).withMessage('Tu comentario debe ser minimo de 4 caracteres'),
+   verifyToken,
+   verifyValidations,
 ]
 
 const validatorGetComment = [

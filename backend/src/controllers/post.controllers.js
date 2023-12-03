@@ -29,10 +29,11 @@ const ctrlCreatePost = async (req , res ) =>{
 }
 
 const ctrlAllPost = async (req, res) =>{
-    const userId = req.user._id
+    
    
     try {
-        const postList = await PostModel.find({autor: userId})
+        
+        const postList = await PostModel.find()
             .populate( 'autor', ['username'])
             .populate( 'comments', ['autor','description'])
 
@@ -70,13 +71,13 @@ const ctrlDeletePost = async (req , res ) =>{
 
 }
 const ctrlGetPost = async (req , res ) =>{
-    const userId = req.user._id
+    
     const {postId} = req.params
 
     try {
         const postList = await PostModel.findOne({
             _id: postId,
-            autor: userId
+            
         })
             .populate( 'autor', ['username'])
             .populate( 'comments', ['autor','description'])
