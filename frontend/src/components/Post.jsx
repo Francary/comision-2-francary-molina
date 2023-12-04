@@ -3,7 +3,7 @@ import { BsFillTrash3Fill , BsPencilFill   } from "react-icons/bs";
 import { AuthContext } from "../providers/AuthProvider.jsx"
 import { Link } from "react-router-dom";
 
-const Post = ( {title, description, imageURL,createdAt} ) => {
+const Post = ( {title, description, imageURL, createdAt} ) => {
 
     const {auth} = useContext(AuthContext)
    

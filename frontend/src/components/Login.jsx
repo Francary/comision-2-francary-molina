@@ -1,14 +1,17 @@
-import { useContext, useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useRef,  } from "react"
+
 import { AuthContext } from "../providers/AuthProvider.jsx";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/const.js";
 
 const Login = () => {
 
     const ref = useRef(null)
-    const navigate = useNavigate()
 
     const {login} = useContext(AuthContext)
+
+    const navigate = useNavigate()
+
 
     const handleSubmit = async (e) =>  {
         e.preventDefault();
@@ -34,9 +37,8 @@ const Login = () => {
         return alert("Error al iniciar secion")
     }
     const res = await req.json()
-
     login(res)
-
+  
     ref.current.reset()
     navigate('/')
 

@@ -1,11 +1,12 @@
 
 import { useContext } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../providers/AuthProvider.jsx"
 
 const Navbar = () => {
-    const {logout} = useContext(AuthContext)
-    return (
+    const {logout ,auth} = useContext(AuthContext)
+  
+  return (
 <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 <div className="container">
    
@@ -25,13 +26,17 @@ const Navbar = () => {
         <li className="nav-item">
             <NavLink className="nav-link " aria-current="page" to="/user/register">REGISTER</NavLink>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
              <NavLink className="nav-link " aria-current="page" to="/user/login">LOGIN</NavLink>
-        </li>
+        </li> */}
       </ul>
     </div>
          
-    <button onClick={logout} className="btn btn-outline-danger btn-sm" type="submit">LOGOUT</button>
+    <button 
+        onClick={auth? logout : ""}
+        className={`btn ${auth? "btn btn-danger btn-sm" : "btn btn-success btn-sm"} `}
+        type="submit">{auth? "LOGOUT" : <NavLink className="nav-link " aria-current="page" to="/user/login">LOGIN</NavLink>}
+    </button>
         
 </div>
 </nav>
