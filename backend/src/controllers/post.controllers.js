@@ -1,3 +1,4 @@
+import { CommentModel } from "../models/comment.models.js";
 import { PostModel } from "../models/post.models.js"
 import { UserModel } from "../models/user.models.js";
 
@@ -36,6 +37,14 @@ const ctrlAllPost = async (req, res) =>{
         const postList = await PostModel.find()
             .populate( 'autor', ['username'])
             .populate( 'comments', ['autor','description'])
+            // Tengo que mejorarlo
+            .populate({
+                path: 'comments',
+                populate: {
+                  path: 'autor',
+                  model: 'User'
+                }
+              })
 
             return res.status(200).json(postList)
     } catch (error) {
@@ -48,23 +57,27 @@ const ctrlDeletePost = async (req , res ) =>{
     const {postId} = req.params
     
     try {
-        const postList = await PostModel.findOne({
+        const post = await PostModel.findOne({
             _id: postId,
             autor: userId,
         })
-        if (!postList) {
+        if (!post) {
             return res.status(404).json({error: 'No tienes permisos para Eliminar este Post o el Post no existe'})
         }
+        await CommentModel.deleteMany({ _id: { $in: post.comments } });
+        
+        
         await PostModel.findOneAndDelete({
             _id: postId,
             autor: userId,
         })
         await UserModel.findOneAndUpdate(
             { _id: userId },
-            { $pull: { post: postId } }
-           
+            { $pull: { post: postId } },
+                      
         )
-        return res.status(200).json({ message: 'Post Eliminado exitosamente' });
+
+        return res.status(200).json({ message: 'Post Eliminado exitosamente NUEVO' });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -82,7 +95,7 @@ const ctrlGetPost = async (req , res ) =>{
             .populate( 'autor', ['username'])
             .populate( 'comments', ['autor','description'])
 
-            if (!postList){
+            if (!postList){ 
                 return res.status(404).json({error: 'Post no Encontrado'})
             }
             return res.status(200).json(postList)

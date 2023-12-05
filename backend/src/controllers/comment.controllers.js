@@ -35,6 +35,16 @@ const ctrlAllComment = async (req, res) =>{
     
     try {
         const commentList = await CommentModel.find({post: postId})
+        .populate('autor', ['username'])
+        .populate({ 
+            path: 'post',
+            select: ['title'],
+            populate: {
+                path: 'autor',
+                select: ['username']
+            }
+        });
+
         return res.status(200).json(commentList)
     } catch (error) {
         return res.status(500).json({ error: "Comentarios no encontrados" });
@@ -76,7 +86,6 @@ const ctrlDeleteComment = async (req, res) =>{
             _id: commentId,
             post: postId
         })
-
         await PostModel.findOneAndUpdate(
             {_id: postId},
             { $pull: { comments: commentId }}
