@@ -74,8 +74,7 @@ const ctrlDeletePost = async (req , res ) =>{
         await UserModel.findOneAndUpdate(
             { _id: userId },
             { $pull: { post: postId } },
-            { $pull: { comment: postId.comments}}
-           
+                      
         )
 
         return res.status(200).json({ message: 'Post Eliminado exitosamente NUEVO' });
