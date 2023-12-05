@@ -66,17 +66,22 @@ const ctrlDeletePost = async (req , res ) =>{
         }
         await CommentModel.deleteMany({ _id: { $in: post.comments } });
         
-        
-        await PostModel.findOneAndDelete({
-            _id: postId,
-            autor: userId,
-        })
+        const commentIds = post.comments.map(comment => comment.toString());
+
         await UserModel.findOneAndUpdate(
             { _id: userId },
-            { $pull: { post: postId } },
-                      
-        )
+            { $pull: { comment: { $in: commentIds } } },
+            );
 
+        await UserModel.findOneAndUpdate(
+            { _id: userId },      
+            { $pull: { post: postId } },         
+            )
+                    
+            await PostModel.findOneAndDelete({
+                _id: postId,
+                autor: userId,
+            })
         return res.status(200).json({ message: 'Post Eliminado exitosamente NUEVO' });
     } catch (error) {
         return res.status(500).json({ error: error.message });
