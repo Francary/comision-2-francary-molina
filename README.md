@@ -12,10 +12,22 @@ Problemática: Creación de Plataforma Interactiva de Viajes con Registro y Logi
 
 
     - Server inicia con npm run dev
-
+---
 ### 2. Frontend
 
     - React Vite
-    - Login / Logout
-    - Register
-    
+    - Bootstrap
+    - Login / Logout ---> Solo esta visible cuando corresponde
+```js
+   <button 
+        onClick={auth? logout : ""}
+        className={`btn ${auth? "btn btn-danger btn-sm" : "btn btn-success btn-sm"} `}
+        type="submit">{auth? "LOGOUT" : <NavLink className="nav-link " aria-current="page" to="/user/login">LOGIN</NavLink>}
+    </button>
+```
+
+    - Register ---> Si Estas Logegado no se ve la Opcion Register
+```js
+    <NavLink className={`nav-link ${auth? "d-none": "d-block"}`}  aria-current="page" to="/user/register">REGISTER</NavLink>
+```
+> Autor Francary Molina 
