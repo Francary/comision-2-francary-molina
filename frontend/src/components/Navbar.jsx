@@ -24,11 +24,8 @@ const Navbar = () => {
             <NavLink className="nav-link " aria-current="page" to="/post">POST</NavLink>
         </li>
         <li className="nav-item">
-            <NavLink className="nav-link " aria-current="page" to="/user/register">REGISTER</NavLink>
+            <NavLink className={`nav-link ${auth? "d-none": "d-block"}`}  aria-current="page" to="/user/register">REGISTER</NavLink>
         </li>
-        {/* <li className="nav-item">
-             <NavLink className="nav-link " aria-current="page" to="/user/login">LOGIN</NavLink>
-        </li> */}
       </ul>
     </div>
          
