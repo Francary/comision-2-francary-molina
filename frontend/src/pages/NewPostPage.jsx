@@ -1,8 +1,36 @@
+import { useContext, useState } from "react"
+import { API_URL } from "../utils/const.js"
+import { AuthContext } from "../providers/AuthProvider.jsx"
+import { useNavigate } from "react-router-dom"
+
 const NewPostPage = () => {
+    const navigate = useNavigate()
+    const {auth} = useContext(AuthContext)
 
     const handleSubmint = async (e) =>{
         e.preventDefault()
 
+        const formData = new FormData(e.target)
+        const data = {
+            title : formData.get("title"),
+            description: formData.get("description"),
+            imageURL: formData.get("imageURL")
+        }
+
+        fetch(`${API_URL}/post/newpost`,{
+            method: "POST",
+            headers: {
+                Authorization: auth.token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+            
+        })
+        .then((res)=> {
+            if(res.status !== 201) return alert("Error al Crear Post")})
+        .then(()=>{
+                navigate(`/post`)
+            })
     }
     return (
         <div className="container-fluid d-flex flex-column justify-content-center aling-items-center mt-5">

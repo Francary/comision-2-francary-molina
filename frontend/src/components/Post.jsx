@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 
 const Post = ( {title, description, imageURL, createdAt} ) => {
 
-    const {auth} = useContext(AuthContext)
-   
-
+    const {auth} = useContext(AuthContext) 
+    
     return (
 
-    <div className="card mb-3">
+    <div className="card mb-3 ">
         <div className="row g-0">
             <div className="col-md-4">
                 <img src={imageURL} className="img-fluid rounded-start" alt="..."/>
@@ -19,7 +18,10 @@ const Post = ( {title, description, imageURL, createdAt} ) => {
                 <div className="card-body">
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{description}</p>
-                    <p className="card-text"><small className="text-body-secondary"> {createdAt}</small></p>
+                    <p className="card-text">
+                        <small className="text-body-secondary"> 
+                         {createdAt} 
+                        </small></p>
                 </div>
             </div>
             <div className="col-md-1">
