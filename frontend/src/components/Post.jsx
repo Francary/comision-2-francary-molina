@@ -3,15 +3,12 @@ import Swal from 'sweetalert2'
 import { BsFillTrash3Fill , BsPencilFill   } from "react-icons/bs";
 import { AuthContext } from "../providers/AuthProvider.jsx"
 import { API_URL } from "../utils/const.js";
+import { Link } from "react-router-dom";
 
 const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh} ) => {
 
     const { auth } = useContext(AuthContext) 
-    
-    // const userId = post.autor._id
-    // console.log("Hola : " , auth.user._id)
-    // console.log("Hola : " , auth)
-
+ 
     const handleDelete = async (postId) =>{
         return  await fetch(`${API_URL}/post/${postId}`,{
                 method:"DELETE",
@@ -20,8 +17,7 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
                 }
             })  
         }
-
-    
+  
     return (
 
     <div className="card mb-3 ">
@@ -41,11 +37,14 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
                 </div>
             </div>
             <div className="col-md-1 ">
-                <button className="btn btn-outline-primary btn-sm m-1">
+                <Link 
+                    className={`btn btn-outline-primary btn-sm m-1 ${!auth? "d-none":""}`}
+                    to={`/post/${postId}`}
+                    >
                     <BsPencilFill/>
-                </button>
+                </Link>
                 
-                <button className={`btn btn-outline-danger btn-sm ${!auth? "d-none":""}`}
+                <button className={`btn btn-outline-danger btn-sm m-1 ${!auth? "d-none":""}`}
                     onClick={() =>{
                         Swal.fire({
                             title: "Quieres eliminar el Post?",

@@ -6,12 +6,14 @@ import { Page404 } from '../pages/404Page.jsx'
 import { PrivateRoutes } from './Private.Routes.jsx'
 import { PostPage } from '../pages/PostPage.jsx'
 import { NewPostPage } from '../pages/NewPostPage.jsx'
+import { EditPostPage } from '../pages/EditPostPage.jsx'
 
 const Router = ()=>{
     return(
         <Routes>
             <Route element={<PrivateRoutes/>}>
                 <Route path='/post/newpost' element={<NewPostPage/>}/>
+                <Route path='/post/:postId' element={<EditPostPage/>}/>
             </Route>
             
             <Route path='/' element={<HomePage/>}/>
