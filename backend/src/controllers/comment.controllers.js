@@ -35,7 +35,7 @@ const ctrlAllComment = async (req, res) =>{
     
     try {
         const commentList = await CommentModel.find({post: postId})
-        .populate('autor', ['username'])
+        .populate('autor', ['username', 'avatarURL'])
         .populate({ 
             path: 'post',
             select: ['title'],
