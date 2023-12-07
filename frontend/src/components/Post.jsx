@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import Swal from 'sweetalert2'
 import { BsFillTrash3Fill , BsPencilFill   } from "react-icons/bs";
 import { AuthContext } from "../providers/AuthProvider.jsx"
@@ -11,6 +11,8 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
 
     const { auth } = useContext(AuthContext) 
  
+    const [ commentList , setCommentList ] = useState([])
+
     const handleDelete = async (postId) =>{
         return  await fetch(`${API_URL}/post/${postId}`,{
                 method:"DELETE",
@@ -20,6 +22,18 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             })  
         }
   
+
+
+    const getCommentList = () =>{
+     
+            fetch(`${API_URL}/comment/${postId}`)
+            .then((res)=> res.json())
+            .then((data)=> setCommentList(data))
+       
+    }
+    useEffect (() => { 
+        getCommentList()
+    },[])
     return (
 
     <div className="card mb-3 ">
@@ -63,7 +77,25 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
                 </button> 
             </div>
         </div>
-                <Comments/>
+        <div>
+            {
+                commentList.map((comment)=>{
+                    return(
+                        <Comments
+                        key={comment._id}
+                        description={comment.description}
+                        createdAt={comment.createdAt}
+                        refresh={getCommentList}
+                        imageURL={comment.autor.avatarURL}
+                        />
+
+                    )
+                })
+
+            }
+
+
+        </div>
     </div>
     )
 }

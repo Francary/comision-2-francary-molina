@@ -1,7 +1,8 @@
 import { useContext } from "react"
 import { AuthContext } from "../providers/AuthProvider.jsx"
+import { BsFillTrash3Fill } from "react-icons/bs"
 
-const Comments = () =>{
+const Comments = ({description , imageURL, createdAt }) =>{
     const { auth } = useContext(AuthContext) 
 
     return (
@@ -10,10 +11,18 @@ const Comments = () =>{
         <div className="card m-3">
             <div className="row g-0">
             <div className="col-md-2">
-                <p>Imagen Avatar</p>
+            <img src={imageURL} className="img-fluid rounded-start" alt="..."/>
             </div>
-            <div className="col-md-10">
-                <p>Hola Comentarios</p>
+            <div className="col-md-7">
+                <p>{description}</p>
+            </div>
+            <div className="col-md-2">
+                <p>{createdAt}</p>
+            </div>
+            <div className="col-md-1">
+            <button className={`btn btn-outline-danger btn-sm m-1 ${!auth? "d-none":""}`}>
+                <BsFillTrash3Fill />
+                </button>
             </div>
             </div>
 
