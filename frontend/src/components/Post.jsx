@@ -4,6 +4,8 @@ import { BsFillTrash3Fill , BsPencilFill   } from "react-icons/bs";
 import { AuthContext } from "../providers/AuthProvider.jsx"
 import { API_URL } from "../utils/const.js";
 import { Link } from "react-router-dom";
+import { alertDelete, alertDeleteOk } from "../utils/options.SweetAlert.js";
+import { Comments } from "./Comment.jsx";
 
 const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh} ) => {
 
@@ -37,48 +39,31 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
                 </div>
             </div>
             <div className="col-md-1 ">
-                <Link 
-                    className={`btn btn-outline-primary btn-sm m-1 ${!auth? "d-none":""}`}
-                    to={`/post/${postId}`}
-                    >
+                <Link className={`btn btn-outline-primary btn-sm m-1 ${!auth? "d-none":""}`} to={`/post/${postId}`}>
                     <BsPencilFill/>
                 </Link>
                 
                 <button className={`btn btn-outline-danger btn-sm m-1 ${!auth? "d-none":""}`}
                     onClick={() =>{
-                        Swal.fire({
-                            title: "Quieres eliminar el Post?",
-                            text: "Si lo eliminas no se puede recuperar!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#dc3545",
-                            cancelButtonColor: "#198754",
-                            confirmButtonText: "Eliminar"
-                            }).then((result) => {
+                        Swal.fire(alertDelete)
+                        .then((result) => {
                             if (result.isConfirmed) {
-                                handleDelete(postId)
-                                
+                                handleDelete(postId) 
                                 .then((res) => {
                                     if (res.status === 200){
-                                        Swal.fire({
-                                            title: "Eliminado!",
-                                            text: "Post Eliminado Correctamente...",
-                                            confirmButtonColor: "#dc3545",
-                                            icon: "success"
-                                            }); 
-                                            refresh()   
+                                        Swal.fire(alertDeleteOk); 
+                                        refresh()   
                                     } 
                                 })
-                               
                             }
-                            });
+                        });
                     }
-                }
-                    >
+                }>
                     <BsFillTrash3Fill />
                 </button> 
             </div>
         </div>
+                <Comments/>
     </div>
     )
 }
