@@ -9,11 +9,15 @@ const PostPage = () => {
     const [ postList , setPostList ] = useState([])
     const {auth} = useContext(AuthContext)
     
-
-    useEffect (() => {
-        fetch(`${API_URL}/post`)
-        .then((res)=> res.json())
-        .then((data)=> setPostList(data))
+    const getPostList = () =>{
+     
+            fetch(`${API_URL}/post`)
+            .then((res)=> res.json())
+            .then((data)=> setPostList(data))
+       
+    }
+    useEffect (() => { 
+        getPostList()
     },[])
     
     return (
@@ -35,7 +39,9 @@ const PostPage = () => {
                         imageURL={post.imageURL}
                         description={post.description}
                         createdAt={post.createdAt}
-
+                        autor={post.autor.username}
+                        postId={post._id}
+                        refresh= {getPostList}
                         />
                     )
                 }) 
