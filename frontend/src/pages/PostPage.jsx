@@ -41,6 +41,8 @@ const PostPage = () => {
                         createdAt={post.createdAt}
                         autor={post.autor.username}
                         postId={post._id}
+                        comments={post.comments}
+                        autorId ={post.autor._id}
                         refresh= {getPostList}
                         />
                     )

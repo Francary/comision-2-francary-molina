@@ -8,12 +8,14 @@ import { PostPage } from '../pages/PostPage.jsx'
 import { NewPostPage } from '../pages/NewPostPage.jsx'
 import { EditPostPage } from '../pages/EditPostPage.jsx'
 
+
 const Router = ()=>{
     return(
         <Routes>
             <Route element={<PrivateRoutes/>}>
                 <Route path='/post/newpost' element={<NewPostPage/>}/>
                 <Route path='/post/:postId' element={<EditPostPage/>}/>
+
             </Route>
             
             <Route path='/' element={<HomePage/>}/>
