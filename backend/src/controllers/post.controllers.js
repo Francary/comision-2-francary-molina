@@ -35,7 +35,7 @@ const ctrlAllPost = async (req, res) =>{
     try {
         
         const postList = await PostModel.find()
-            .populate( 'autor', ['username'])
+            .populate( 'autor', ['username', 'avatarURL'])
             .populate( 'comments', ['autor','description'])
             // Tengo que mejorarlo
             .populate({
