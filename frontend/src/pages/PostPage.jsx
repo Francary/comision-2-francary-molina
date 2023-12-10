@@ -40,6 +40,7 @@ const PostPage = () => {
                         description={post.description}
                         createdAt={post.createdAt}
                         autor={post.autor.username}
+                        avatar={post.autor.avatarURL}
                         postId={post._id}
                         comments={post.comments}
                         autorId ={post.autor._id}

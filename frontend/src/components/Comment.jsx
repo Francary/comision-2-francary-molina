@@ -30,8 +30,8 @@ const Comments = ({description , imageURL, createdAt, user, commentId, postId, r
             <div className="col-md-7">
                 <p>{description}</p>
             </div>
-            <div className="col-md-2">
-                <p>{formatoFecha}</p>
+            <div className="col-md-2 d-flex align-items-center justify-content-end">
+                <p className="text-body-secondary">{formatoFecha}</p>
             </div>
             <div className="col-md-1 d-flex align-items-start justify-content-end ">
             <button className={`btn btn-outline-danger btn-sm m-2 ${!auth? "d-none":""}`}

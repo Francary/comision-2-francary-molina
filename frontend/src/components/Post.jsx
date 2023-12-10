@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 import { alertDelete, alertDeleteOk } from "../utils/options.SweetAlert.js";
 import { Comments } from "./Comment.jsx";
 
-const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh ,comments, autorId} ) => {
+const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh ,comments, autorId , avatar} ) => {
     const ref = useRef(null)
     const { auth } = useContext(AuthContext) 
     // console.log("Hola: " ,auth.user._id);
     // console.log("Chao: ",autorId);
+    console.log(avatar);
   
     const [ commentList , setCommentList ] = useState([])
 
@@ -75,14 +76,15 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             </div>
             <div className="col-md-8">
                 <div className="  card-body">
-                    <div className="d-flex align-items-center justify-content-end">
+                    <div className="d-flex align-items-center justify-content-between">
                         <h3 className="card-title">{title}</h3>
-                        <p className="text-body-secondary "> {formatoFecha} </p>
+                        <p className="text-body-secondary"> {formatoFecha} </p>
                     </div>
                     <p className="card-text">{description}</p>
-                    <p className="card-text">
-                        <small>Autor : {autor}  </small>
-                      </p>
+                    <div className="card-text">
+                        <img src={avatar} className="rounded-circle avatar"  alt="..."/>
+                        <small>Autor : {autor} </small>
+                    </div>
                 </div>
             
             </div>
