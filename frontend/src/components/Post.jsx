@@ -12,7 +12,6 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
     const { auth } = useContext(AuthContext) 
     // console.log("Hola: " ,auth.user._id);
     // console.log("Chao: ",autorId);
-    console.log(avatar);
   
     const [ commentList , setCommentList ] = useState([])
 
@@ -76,15 +75,16 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             </div>
             <div className="col-md-8">
                 <div className="  card-body">
-                    <div className="d-flex align-items-center justify-content-between">
+                    <div className="d-flex justify-content-between">
                         <h3 className="card-title">{title}</h3>
+                        <div className="card-text">
+                        <img src={avatar} className="rounded-circle avatarPost"  alt="..."/>
+                        <small className="ms-2">{autor} </small>
                         <p className="text-body-secondary"> {formatoFecha} </p>
                     </div>
-                    <p className="card-text">{description}</p>
-                    <div className="card-text">
-                        <img src={avatar} className="rounded-circle avatar"  alt="..."/>
-                        <small>Autor : {autor} </small>
                     </div>
+                    <p className="card-text">{description}</p>
+
                 </div>
             
             </div>

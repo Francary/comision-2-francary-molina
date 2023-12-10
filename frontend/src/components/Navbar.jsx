@@ -7,7 +7,7 @@ const Navbar = () => {
     const {logout ,auth} = useContext(AuthContext)
   
   return (
-<nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top" data-bs-theme="dark">
 <div className="container">
    
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

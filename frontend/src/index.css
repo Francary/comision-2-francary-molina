@@ -16,8 +16,13 @@ footer {
     width: 100%;
 }
 
-.avatar {
+.avatarComment {
     width:  50px;
     max-height: 50px;
     margin: 10px;
+}
+.avatarPost {
+    width:  50px;
+    max-height: 50px;
+    
 }

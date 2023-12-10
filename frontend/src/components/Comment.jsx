@@ -24,10 +24,10 @@ const Comments = ({description , imageURL, createdAt, user, commentId, postId, r
         <div className="card m-3">
             <div className="row g-0">
             <div className="col-md-2">
-            <img src={imageURL} className="rounded-circle avatar"  alt="..."/>
+            <img src={imageURL} className="rounded-circle avatarComment"  alt="..."/>
             <small>{user}</small>
             </div>
-            <div className="col-md-7">
+            <div className="col-md-7 d-flex align-items-center">
                 <p>{description}</p>
             </div>
             <div className="col-md-2 d-flex align-items-center justify-content-end">
