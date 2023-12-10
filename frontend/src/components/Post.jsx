@@ -62,6 +62,10 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
     useEffect (() => { 
         getCommentList()
     },[])
+
+   
+    const formatoFecha = new Date(createdAt).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
     return (
 
     <div className="card mb-3 ">
@@ -71,23 +75,24 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             </div>
             <div className="col-md-8">
                 <div className="  card-body">
-                    <h3 className="card-title">{title}</h3>
+                    <div className="d-flex align-items-center justify-content-end">
+                        <h3 className="card-title">{title}</h3>
+                        <p className="text-body-secondary "> {formatoFecha} </p>
+                    </div>
                     <p className="card-text">{description}</p>
                     <p className="card-text">
                         <small>Autor : {autor}  </small>
-                        <small className="text-body-secondary"> 
-                         {createdAt} 
-                        </small></p>
+                      </p>
                 </div>
             
             </div>
-            <div className="col-md-1">
-                <Link className={`btn btn-outline-primary btn-sm m-1 ${!auth? "d-none":""}`} to={`/post/${postId}`}>
+            <div className="col-md-1 d-flex align-items-start justify-content-end">
+                <Link className={`btn btn-outline-primary btn-sm m-2 ${!auth? "d-none":""}`} to={`/post/${postId}`}>
                 {/* <Link className={`btn btn-outline-primary btn-sm m-1 ${!auth? "d-none":""}`} to={`/post/${postId}`}> */}
                     <BsPencilFill/>
                 </Link>
                 
-                <button className={`btn btn-outline-danger btn-sm m-1 ${!auth? "d-none":""}`}
+                <button className={`btn btn-outline-danger btn-sm mt-2 me-2 ${!auth? "d-none":""}`}
                     onClick={() =>{
                         Swal.fire(alertDelete)
                         .then((result) => {

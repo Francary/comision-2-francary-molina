@@ -17,6 +17,7 @@ const Comments = ({description , imageURL, createdAt, user, commentId, postId, r
             })  
         }
 
+        const formatoFecha = new Date(createdAt).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
     return (
     <div>
         
@@ -30,10 +31,10 @@ const Comments = ({description , imageURL, createdAt, user, commentId, postId, r
                 <p>{description}</p>
             </div>
             <div className="col-md-2">
-                <p>{createdAt}</p>
+                <p>{formatoFecha}</p>
             </div>
-            <div className="col-md-1">
-            <button className={`btn btn-outline-danger btn-sm m-1 ${!auth? "d-none":""}`}
+            <div className="col-md-1 d-flex align-items-start justify-content-end ">
+            <button className={`btn btn-outline-danger btn-sm m-2 ${!auth? "d-none":""}`}
                         onClick={() =>{
                             Swal.fire(alertDeleteComment)
                             .then((result) => {
