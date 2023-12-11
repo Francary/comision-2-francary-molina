@@ -22,7 +22,7 @@ const PostPage = () => {
     
     return (
    
-    <div className="container d-flex flex-column p-3 gap-4 justify-content-center mt-5">
+    <div className="container d-flex flex-column gap-4 justify-content-center mt-3">
         <h1 className="text-center">POST PAGE</h1>
 
         <div className="d-flex flex-row gap-4">

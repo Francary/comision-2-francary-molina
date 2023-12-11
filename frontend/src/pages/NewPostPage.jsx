@@ -33,7 +33,7 @@ const NewPostPage = () => {
             })
     }
     return (
-        <div className="container d-flex flex-column justify-content-center aling-items-center mt-5">
+        <div className="container d-flex flex-column justify-content-center aling-items-center mt-3">
             <h1 className="text-center">NEW POST</h1>
             <form className="d-flex flex-column gap-3 mt-5" onSubmit={handleSubmint}>
 

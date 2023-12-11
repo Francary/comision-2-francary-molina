@@ -3,13 +3,13 @@ const HomePage = () => {
 
     return(
       
-        <div className="container d-flex flex-column p-3 gap-4 justify-content-center mt-3">
+        <div className="container d-flex flex-column  gap-4 justify-content-center mt-3">
             <h1 className="text-center">Explorando el Mundo: </h1>
             <p> ¡Bienvenidos al emocionante mundo de los viajes! Hoy nos reunimos en este foro para explorar juntos las maravillas que el mundo tiene para ofrecer. Preparémonos para un viaje lleno de descubrimientos, aventuras y experiencias inolvidables</p>
             
             <h1 className="text-center">Top 10 Recomendaciones para Viajes</h1>
 
-            <ol className="container d-flex flex-column p-3 gap-2 justify-content-center mt-1">
+            <ol className="container d-flex flex-column gap-2 justify-content-center mt-1">
                 <li><strong>Investigación Previa:</strong> Antes de viajar, investiga sobre el destino. Aprende sobre la cultura local, las costumbres y las atracciones turísticas.</li>
 
                 <li><strong>Empaque Eficiente:</strong> Sé selectivo al empacar. Lleva ropa versátil y empaca solo lo esencial. Considera el clima y la duración de tu viaje al seleccionar tu guardarropa.</li>
