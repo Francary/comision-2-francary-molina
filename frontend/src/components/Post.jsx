@@ -10,9 +10,6 @@ import { Comments } from "./Comment.jsx";
 const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh ,comments, autorId , avatar} ) => {
     const ref = useRef(null)
     const { auth } = useContext(AuthContext) 
-    // console.log("Hola: " ,auth.user._id);
-    // console.log("Chao: ",autorId);
-  
     const [ commentList , setCommentList ] = useState([])
 
     const handleDelete = async (postId) =>{
@@ -50,8 +47,6 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             })
     }
    
-        
-
     const getCommentList = () =>{
      
             fetch(`${API_URL}/comment/${postId}`)
@@ -63,7 +58,8 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
         getCommentList()
     },[])
 
-   
+    const isAutor = auth?.user._id
+    
     const formatoFecha = new Date(createdAt).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
     return (
@@ -89,12 +85,11 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             
             </div>
             <div className="col-md-1 d-flex align-items-start justify-content-end">
-                <Link className={`btn btn-outline-primary btn-sm m-2 ${!auth? "d-none":""}`} to={`/post/${postId}`}>
-                {/* <Link className={`btn btn-outline-primary btn-sm m-1 ${!auth? "d-none":""}`} to={`/post/${postId}`}> */}
+                <Link className={`btn btn-outline-primary btn-sm m-2 ${(autorId !== isAutor )? "d-none":""}`} to={`/post/${postId}`}>
                     <BsPencilFill/>
                 </Link>
                 
-                <button className={`btn btn-outline-danger btn-sm mt-2 me-2 ${!auth? "d-none":""}`}
+                <button className={`btn btn-outline-danger btn-sm mt-2 me-2 ${(autorId !== isAutor )? "d-none":""}`}
                     onClick={() =>{
                         Swal.fire(alertDelete)
                         .then((result) => {
@@ -134,7 +129,8 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
                         createdAt={comment.createdAt}
                         refresh={getCommentList}
                         imageURL={comment.autor.avatarURL}
-                        user={comment.autor.username}
+                        username={comment.autor.username}
+                        autorComment={comment.autor._id}
                         postId = {postId}
                         commentId={comment._id}
                         />

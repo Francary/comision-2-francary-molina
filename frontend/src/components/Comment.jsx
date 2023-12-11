@@ -5,8 +5,9 @@ import { alertDeleteComment, alertDeleteCommentOk } from "../utils/options.Sweet
 import Swal from "sweetalert2"
 import { API_URL } from "../utils/const.js"
 
-const Comments = ({description , imageURL, createdAt, user, commentId, postId, refresh }) =>{
+const Comments = ({description , imageURL, createdAt, username, commentId, postId,autorComment, refresh }) =>{
     const { auth } = useContext(AuthContext) 
+    const isAutor = auth?.user._id
 
     const commentDelete = async (postId , commentId) =>{
         return  await fetch(`${API_URL}/comment/${postId}/${commentId}`,{
@@ -25,7 +26,7 @@ const Comments = ({description , imageURL, createdAt, user, commentId, postId, r
             <div className="row g-0">
             <div className="col-md-2">
             <img src={imageURL} className="rounded-circle avatarComment"  alt="..."/>
-            <small>{user}</small>
+            <small>{username}</small>
             </div>
             <div className="col-md-7 d-flex align-items-center">
                 <p>{description}</p>
@@ -34,7 +35,7 @@ const Comments = ({description , imageURL, createdAt, user, commentId, postId, r
                 <p className="text-body-secondary">{formatoFecha}</p>
             </div>
             <div className="col-md-1 d-flex align-items-start justify-content-end ">
-            <button className={`btn btn-outline-danger btn-sm m-2 ${!auth? "d-none":""}`}
+            <button className={`btn btn-outline-danger btn-sm m-2 ${(autorComment !== isAutor )? "d-none":""}`}
                         onClick={() =>{
                             Swal.fire(alertDeleteComment)
                             .then((result) => {
