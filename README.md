@@ -30,4 +30,9 @@ Problemática: Creación de Plataforma Interactiva de Viajes con Registro y Logi
 ```js
     <NavLink className={`nav-link ${auth? "d-none": "d-block"}`}  aria-current="page" to="/user/register">REGISTER</NavLink>
 ```
+    - Post . Solo el Autor del Post puede eliminarlo o editarlo
+    - Comment . Solo el Autor del Comentario puede eliminarlo o editarlo
+
+
+    
 > Autor Francary Molina 
