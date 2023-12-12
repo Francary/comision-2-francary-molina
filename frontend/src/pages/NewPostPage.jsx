@@ -2,6 +2,8 @@ import { useContext } from "react"
 import { API_URL } from "../utils/const.js"
 import { AuthContext } from "../providers/AuthProvider.jsx"
 import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
+import { alertCreatePost, alertCreatePostOk } from "../utils/options.SweetAlert.js"
 
 const NewPostPage = () => {
     const navigate = useNavigate()
@@ -27,10 +29,13 @@ const NewPostPage = () => {
             
         })
         .then((res)=> {
-            if(res.status !== 201) return alert("Error al Crear Post")})
-        .then(()=>{
-                navigate(`/post`)
-            })
+            if(res.status !== 201){
+                Swal.fire(alertCreatePost);
+            } else{
+                Swal.fire(alertCreatePostOk)
+                navigate(`/post`); 
+            }})
+   
     }
     return (
         <div className="container d-flex flex-column justify-content-center aling-items-center mt-3">

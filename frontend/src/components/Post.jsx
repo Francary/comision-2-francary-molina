@@ -4,7 +4,7 @@ import { BsFillTrash3Fill , BsPencilFill   } from "react-icons/bs";
 import { AuthContext } from "../providers/AuthProvider.jsx"
 import { API_URL } from "../utils/const.js";
 import { Link } from "react-router-dom";
-import { alertDelete, alertDeleteOk } from "../utils/options.SweetAlert.js";
+import { alertCreateComment, alertCreateCommentOk, alertDelete, alertDeleteOk } from "../utils/options.SweetAlert.js";
 import { Comments } from "./Comment.jsx";
 
 const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh ,comments, autorId , avatar} ) => {
@@ -41,24 +41,10 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
         })
         .then((res)=> {
             if(res.status !== 201){
-
-                Swal.fire({
-                    icon: "error",
-                    title:"Error al Crear Comentario",
-                    text: "El Comentario no puede estar vacio y debe ser minimo 4 caracteres",
-                    timer: 2000
-                });
+                Swal.fire(alertCreateComment);
             } else{
-                Swal.fire({
-                    title: `Crear Comentario` ,
-                    text: `Comentario Creado Correctamente por ${autor}`,
-                    icon: "success",
-                    timer: 2000
-                  }); 
-            }
-
-                
-            })
+                Swal.fire(alertCreateCommentOk); 
+            }})
         .then(()=>{
             getCommentList() 
             ref.current.reset()

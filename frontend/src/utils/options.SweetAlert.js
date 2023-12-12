@@ -45,9 +45,51 @@ const alertDeleteComment = (
         cancelButtonColor: colors.cancelar,
         confirmButtonText: "Eliminar"
     })
+
+const alertCreateCommentOk =(
+    {
+        title: `Crear Comentario` ,
+        text: `Comentario Creado Correctamente`,
+        icon: "success",
+        timer: 2000
+      }
+    
+) 
+
+const alertCreateComment = (
+    {
+        icon: "error",
+        title:"Error al Crear Comentario",
+        text: "El Comentario debe ser minimo 4 caracteres",
+        timer: 2000
+    }
+)
+
+const alertCreatePostOk =(
+    {
+        title: `Crear Post` ,
+        text: `Post Creado Correctamente`,
+        icon: "success",
+        timer: 2000
+      }
+    
+)
+
+const alertCreatePost = (
+    {
+        icon: "error",
+        title:"Error al Crear Post",
+        text: "El title , description e imagen son Obligatorios",
+        timer: 2000
+    }
+)
 export {
     alertDelete,
     alertDeleteOk,
     alertDeleteComment,
     alertDeleteCommentOk,
+    alertCreateCommentOk,
+    alertCreateComment,
+    alertCreatePost,
+    alertCreatePostOk,
 }

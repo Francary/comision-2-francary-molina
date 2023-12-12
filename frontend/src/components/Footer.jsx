@@ -14,8 +14,8 @@ const Footer = () => {
             </div>
 
              <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li className=""><Link className="text-white btn btn-lg" to="https://www.instagram.com/francarymolinapaez/"><BsInstagram /></Link></li>
-                <li className=""><Link className="text-white btn btn-lg" to="https://github.com/Francary/"><BsGithub /></Link></li>  
+                <li className=""><Link className="text-white btn btn-lg" to="https://www.instagram.com/francarymolinapaez/" target="_blank"><BsInstagram /></Link></li>
+                <li className=""><Link className="text-white btn btn-lg" to="https://github.com/Francary/" target="_blank"><BsGithub /></Link></li>  
             </ul>
         </div> 
     </footer>
