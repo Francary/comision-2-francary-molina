@@ -40,7 +40,25 @@ const Post = ( {postId, title, description, imageURL, createdAt, autor , refresh
             
         })
         .then((res)=> {
-            if(res.status !== 201) return alert("Error al Crear Comment")})
+            if(res.status !== 201){
+
+                Swal.fire({
+                    icon: "error",
+                    title:"Error al Crear Comentario",
+                    text: "El Comentario no puede estar vacio y debe ser minimo 4 caracteres",
+                    timer: 2000
+                });
+            } else{
+                Swal.fire({
+                    title: `Crear Comentario` ,
+                    text: `Comentario Creado Correctamente por ${autor}`,
+                    icon: "success",
+                    timer: 2000
+                  }); 
+            }
+
+                
+            })
         .then(()=>{
             getCommentList() 
             ref.current.reset()
