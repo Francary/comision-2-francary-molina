@@ -8,7 +8,8 @@ const PostPage = () => {
 
     const [ postList , setPostList ] = useState([])
     const {auth} = useContext(AuthContext)
-    
+    const [filter , setFilter ] = useState([])
+    const [search , setShearch] = useState("")
     const getPostList = () =>{
      
             fetch(`${API_URL}/post`)
@@ -19,6 +20,13 @@ const PostPage = () => {
     useEffect (() => { 
         getPostList()
     },[])
+
+    useEffect (()=>{
+        const filtrar = postList.filter((post)=>{
+            return post.title.toLowerCase().includes(search.toLowerCase().trim())
+        })
+        setFilter(filtrar)
+    },[postList,search])
     
     return (
    
@@ -27,11 +35,14 @@ const PostPage = () => {
 
         <div className="d-flex flex-row gap-4">
                 <Link className="btn btn-success" to="/post/newpost">Create</Link>
-                <input type="search" name="" id="" placeholder="Search" className="form-control"/>
+                <input type="search" name="" id="" placeholder="Search" className="form-control"
+                onChange={ (e) => setShearch(e.target.value)}
+                value={search}
+                />
         </div>
         <div>
             {
-                postList.map((post) => {
+                filter.map((post) => {
                     return(
                         <Post
                         key={post._id}
